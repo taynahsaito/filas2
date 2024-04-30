@@ -10,7 +10,10 @@ public class Fila{
 
     
     public Fila (int capacidade){
-        dados = new int[capacidade];
+        if (capacidade > 10)
+            dados = new int[capacidade];
+        else 
+            dados = new int[CAPACIDADE_MINIMA];
         ultimo = dados.length - 1;
         primeiro = 0;
         tamanho = 0;
@@ -52,8 +55,35 @@ public class Fila{
     public String toString(){
         if (estaVazia()) return "fila vazia";
         String s = ""; //string vazia é diferente de uma string nula
-        for(int i = primeiro; i != proxima(ultimo); i = proxima(i)){
+        int i = primeiro;
+        do{
             s += dados[i] + " ";
+            i = proxima(i);
+
+        }while (i != proxima(ultimo));
+        return s;
+    }
+    public String stringDoVetor(){
+        if (estaVazia()){
+            return ("_ _ _ _ _ _ _ _ _ _");
+        }
+        String s = "";
+        int i;
+        if (primeiro <= ultimo){
+            for (i = 0; i< primeiro; i++)
+                s += "_ ";
+            for (i = primeiro; i<= ultimo; i++)
+                s += dados[i] + " ";
+            for (i=ultimo+1; i<dados.length; i++)
+                s += "_ ";
+        }
+        else{
+            for(i=0; i<ultimo; i++)
+                s += dados[i] + " ";
+            for(i=ultimo+1; i<primeiro;i++)
+                s += "_ ";
+            for (i= primeiro; i<dados.length;i++)
+                s += dados[i] + " ";
         }
         return s;
     }
