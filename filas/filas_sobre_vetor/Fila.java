@@ -9,11 +9,8 @@ public class Fila{
     // quando nao parametrizamos um valor, chamamos ele de "numero magico" pois surgiu do nada
 
     
-    public Fila (int capacidade){
-        if (capacidade > 10)
-            dados = new int[capacidade];
-        else 
-            dados = new int[CAPACIDADE_MINIMA];
+    public Fila (int capacidade) {
+        dados = new int[capacidade];
         ultimo = dados.length - 1;
         primeiro = 0;
         tamanho = 0;
@@ -54,16 +51,24 @@ public class Fila{
     @Override
     public String toString(){
         if (estaVazia()) return "fila vazia";
-        String s = ""; //string vazia é diferente de uma string nula
+        String s = ""; //string vazia é diferente de uma string nula - string nula não existe
+        //o for não funciona caso a fila estiver cheia, pois precisa rodar primeiro e processar depois
+        // for (int i=primeiro; i != proxima(ultimo); i = proxima(i)){ 
+        //     s += dados[i] + "";
+        // }
         int i = primeiro;
         do{
-            s += dados[i] + " ";
+            s+= dados + " ";
             i = proxima(i);
+        }while(i!= proxima(ultimo));
 
-        }while (i != proxima(ultimo));
         return s;
     }
+
+    //estamos manipulando o vetor, não a fila
     public String stringDoVetor(){
+        //aqui, se eu quisesse referenciar a um objeto especifico seria usado o 'this'(que esta implicito), que na classe teste seria o 'f.'
+        //os metodos de uma classe estao se referindo aos atributos da propria classe.
         if (estaVazia()){
             return ("_ _ _ _ _ _ _ _ _ _");
         }
@@ -80,11 +85,12 @@ public class Fila{
         else{
             for(i=0; i<ultimo; i++)
                 s += dados[i] + " ";
-            for(i=ultimo+1; i<primeiro;i++)
+            for(i=ultimo + 1; i<primeiro; i++)
                 s += "_ ";
-            for (i= primeiro; i<dados.length;i++)
+            for (i=primeiro; i<dados.length;i++)
                 s += dados[i] + " ";
         }
         return s;
+        
     }
 }

@@ -1,4 +1,4 @@
-public class FilaGenerica <T>{
+public class FilaGenerica <T>{//<E> = elementos do vetor/ <T> = tipos
     private int primeiro;
     private int ultimo;
     private T[] dados;
@@ -42,13 +42,11 @@ public class FilaGenerica <T>{
         return true;
     }   
     public T desenfileira(){
-        T info = null;
-        if (!estaVazia()) {
-            info = dados[primeiro];
-            primeiro = proxima(primeiro);
-            tamanho--;
-        }
-        return info;    
+        if (estaVazia()) return null;
+        T temp = dados[primeiro];
+        primeiro = proxima(primeiro);
+        tamanho--;
+        return temp; 
     }
 
     @Override
